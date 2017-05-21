@@ -5,9 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-
+    public static float scale = 2;
     public BoardManager boardScript;
-
     public int level;
 
     void Awake()

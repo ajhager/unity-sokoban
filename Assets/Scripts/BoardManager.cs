@@ -27,10 +27,11 @@ public class BoardManager : MonoBehaviour
     public GameObject wall;
 
     private Transform board;
-    private float scale = 2;
 
     public void SetupBoard(int levelIndex)
     {
+        float scale = GameManager.scale;
+
         board = new GameObject("Board").transform;
         string[] level = levels[levelIndex];
         float maxY = level.Length;
