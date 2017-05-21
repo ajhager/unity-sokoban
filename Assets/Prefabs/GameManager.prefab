@@ -19,9 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4655224683074018}
+  - component: {fileID: 114871773322982546}
   - component: {fileID: 114103369620044456}
   m_Layer: 0
-  m_Name: BoardManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,3 +57,16 @@ MonoBehaviour:
   goal: {fileID: 1738306524932536, guid: fb65805c5f0bb4dc09d142551c921584, type: 2}
   player: {fileID: 1206911941640024, guid: af8dc8658ee8446dcb0cfb797a834463, type: 2}
   wall: {fileID: 1050713619083254, guid: 98d4e928fb7d14a2c89b7a29c6f179b7, type: 2}
+--- !u!114 &114871773322982546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757497926886926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd4d293bd5bc42eb98326f8a9b7274c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardScript: {fileID: 0}
+  level: 0

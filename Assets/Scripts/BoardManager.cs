@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-    private string[] level1 = {
+    private static string[] level1 = {
         "#########",
         "#....***#",
         "#.#.#*#*#",
@@ -16,6 +16,10 @@ public class BoardManager : MonoBehaviour
         "#########"
     };
 
+    private static string[][] levels = {
+        level1
+    };
+
     public GameObject crate;
     public GameObject floor;
     public GameObject goal;
@@ -25,10 +29,10 @@ public class BoardManager : MonoBehaviour
     private Transform board;
     private float scale = 2;
 
-    void SetupBoard()
+    public void SetupBoard(int levelIndex)
     {
         board = new GameObject("Board").transform;
-        string[] level = level1;
+        string[] level = levels[levelIndex];
         float maxY = level.Length;
         float maxX = 0;
 
@@ -71,15 +75,5 @@ public class BoardManager : MonoBehaviour
         }
 
         board.position = new Vector3(-(maxX / 2)/scale, -(maxY / 2)/scale, 0);
-    }
-
-    void Start()
-    {
-        SetupBoard();
-    }
-
-    void Update()
-    {
-
     }
 }
