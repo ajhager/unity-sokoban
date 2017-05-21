@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Goal
+  - Crate
   layers:
   - Default
   - TransparentFX
