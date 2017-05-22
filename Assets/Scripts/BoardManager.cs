@@ -6,9 +6,9 @@ public class BoardManager : MonoBehaviour
 {
     private static string[] level1 = {
         "#########",
-        "#.......#",
-        "#.#.#.#.#",
-        "#.#..*..#",
+        "#....***#",
+        "#.#.#*#*#",
+        "#.#..***#",
         "#.ooo.#.#",
         "#.o@o...#",
         "#.ooo##.#",
@@ -82,7 +82,10 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        board.position = new Vector3(-(maxX / 2) / scale, -(maxY / 2) / scale, 0);
+		// Center the board in the scene.
+        float halfTile = 1 / (scale);
+        board.position = new Vector3(-(maxX / 2 - halfTile) / scale, -(maxY / 2 + halfTile) / scale, 0);
+
         return goals;
     }
 }
