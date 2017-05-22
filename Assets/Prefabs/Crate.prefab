@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4385248882366194}
   - component: {fileID: 61399644839491744}
   - component: {fileID: 50794852686962762}
-  - component: {fileID: 114071354858753748}
+  - component: {fileID: 114299626472613026}
   m_Layer: 9
   m_Name: Crate
   m_TagString: Crate
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &61399644839491744
@@ -175,9 +175,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
---- !u!114 &114071354858753748
+--- !u!114 &114299626472613026
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -185,13 +185,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1587094444131922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6afcdb5bb39e4d0891b967b0eae5035, type: 3}
+  m_Script: {fileID: 11500000, guid: a5772cb476033447497d9ba73d1ef171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 0.5
   blockingLayers:
     serializedVersion: 2
     m_Bits: 768
+  on: {fileID: 1348500290851674}
+  off: {fileID: 1472820179843298}
 --- !u!212 &212055208149151222
 SpriteRenderer:
   m_ObjectHideFlags: 1

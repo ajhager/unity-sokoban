@@ -6,9 +6,9 @@ public class BoardManager : MonoBehaviour
 {
     private static string[] level1 = {
         "#########",
-        "#....***#",
-        "#.#.#*#*#",
-        "#.#..***#",
+        "#.......#",
+        "#.#.#.#.#",
+        "#.#..*..#",
         "#.ooo.#.#",
         "#.o@o...#",
         "#.ooo##.#",
@@ -16,9 +16,7 @@ public class BoardManager : MonoBehaviour
         "#########"
     };
 
-    private static string[][] levels = {
-        level1
-    };
+    public static string[][] levels = { level1 };
 
     public GameObject crate;
     public GameObject floor;
@@ -28,9 +26,10 @@ public class BoardManager : MonoBehaviour
 
     private Transform board;
 
-    public void SetupBoard(int levelIndex)
+    public int SetupBoard(int levelIndex)
     {
         float scale = GameManager.scale;
+        int goals = 0;
 
         board = new GameObject("Board").transform;
         string[] level = levels[levelIndex];
@@ -38,14 +37,14 @@ public class BoardManager : MonoBehaviour
         float maxX = 0;
 
         for (int y = 0; y < level.Length; y++)
-		{
+        {
             string row = level[y];
             maxX = Mathf.Max(row.Length, maxX);
             for (int x = 0; x < row.Length; x++)
-			{
+            {
                 GameObject tile = null;
-				switch(row[x])
-				{
+                switch (row[x])
+                {
                     case '#':
                         tile = wall;
                         break;
@@ -58,23 +57,32 @@ public class BoardManager : MonoBehaviour
                     case '*':
                         tile = goal;
                         break;
-					case '.':
+                    case '.':
                         tile = floor;
                         break;
 
                 }
 
-                GameObject instance = Instantiate(tile, new Vector3(x/scale, (level.Length - y)/scale, 0), Quaternion.identity);
+                GameObject instance = Instantiate(tile, new Vector3(x / scale, (level.Length - y) / scale, 0), Quaternion.identity);
                 instance.transform.SetParent(board);
 
                 if (tile != floor)
                 {
-                    instance = Instantiate(floor, new Vector3(x/scale, (level.Length - y)/scale, 0), Quaternion.identity);
+					// Add a floor under any tile that isn't already a floor.
+                    instance = Instantiate(floor, new Vector3(x / scale, (level.Length - y) / scale, 0), Quaternion.identity);
                     instance.transform.SetParent(board);
+
+					// Untag floors under goals, so crates don't turn off.
+					if (tile == goal)
+					{
+                        instance.tag = "Untagged";
+                        goals += 1;
+                    }
                 }
             }
         }
 
-        board.position = new Vector3(-(maxX / 2)/scale, -(maxY / 2)/scale, 0);
+        board.position = new Vector3(-(maxX / 2) / scale, -(maxY / 2) / scale, 0);
+        return goals;
     }
 }

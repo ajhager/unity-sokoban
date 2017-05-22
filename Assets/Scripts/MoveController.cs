@@ -21,11 +21,14 @@ public class MoveController : MonoBehaviour {
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
 
-        collider.enabled = false;
+		// Remove yourself from any blocklayers during linecast so you don't block yourself.
+		// Disabling the boxcollider typically work, but it causes triggers to hit twice.
+        int layer = gameObject.layer;
+        gameObject.layer = 0;
         hit = Physics2D.Linecast(start, end, blockingLayers);
-        collider.enabled = true;
+        gameObject.layer = layer;
 
-		if (hit.transform == null)
+        if (hit.transform == null)
 		{
             moving = true;
 
@@ -36,7 +39,7 @@ public class MoveController : MonoBehaviour {
         return false;
     }
 
-	IEnumerator SmoothMovement(Vector3 end)
+	public IEnumerator SmoothMovement(Vector3 end)
 	{
         float remainingDistance = (transform.position - end).sqrMagnitude;
 
@@ -48,6 +51,11 @@ public class MoveController : MonoBehaviour {
             yield return null;
         }
 
-        moving = false;
+        MoveEnded();
     }
+
+	protected virtual void MoveEnded()
+	{
+        moving = false;
+	}
 }
