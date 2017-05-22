@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour {
     public float moveTime = 0.5f;
-    public LayerMask blockingLayer;
-    public LayerMask pushingLayer;
+    public LayerMask blockingLayers;
 
-    private new BoxCollider2D collider;
-    private new Rigidbody2D rigidbody;
-    private Animator animator;
-    private bool moving = false;
+    protected new BoxCollider2D collider;
+    protected new Rigidbody2D rigidbody;
+    protected bool moving = false;
 
-    void Start()
+    protected virtual void Start()
 	{
         collider = GetComponent<BoxCollider2D>();
         rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
     }
 
-	bool Move(float xDir, float yDir, out RaycastHit2D hit)
+	public bool Move(float xDir, float yDir, out RaycastHit2D hit)
 	{
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
 
         collider.enabled = false;
-        hit = Physics2D.Linecast(start, end, blockingLayer);
+        hit = Physics2D.Linecast(start, end, blockingLayers);
         collider.enabled = true;
 
 		if (hit.transform == null)
@@ -52,49 +49,5 @@ public class MoveController : MonoBehaviour {
         }
 
         moving = false;
-    }
-
-    public void Update()
-	{
-		if (moving)
-		{
-            return;
-        }
-
-
-        float horizontal = Input.GetAxisRaw("Horizontal") / GameManager.scale;
-        float vertical = Input.GetAxisRaw("Vertical") / GameManager.scale;
-
-		if (horizontal != 0)
-		{
-            vertical = 0;
-        }
-
-		animator.SetBool("walkLeft", false);
-        animator.SetBool("walkRight", false);
-        animator.SetBool("walkUp", false);
-        animator.SetBool("walkDown", false);
-
-        if (horizontal != 0 || vertical != 0)
-		{
-			if (horizontal > 0) {
-                animator.SetTrigger("walkRight");
-            }
-            else if (horizontal < 0)
-            {
-                animator.SetTrigger("walkLeft");
-            }
-            else if (vertical > 0)
-            {
-                animator.SetTrigger("walkUp");
-            }
-            else if (vertical < 0)
-            {
-                animator.SetTrigger("walkDown");
-            }
-
-            RaycastHit2D hit = new RaycastHit2D();
-            Move(horizontal, vertical, out hit);
-        }
     }
 }
