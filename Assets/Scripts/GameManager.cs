@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int level;
 
     private int goals = 0;
+	private Text winText;
 
     void Awake()
     {
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 		{
             Destroy(this);
         }
+
+		winText = GameObject.Find("WinText").GetComponent<Text>();
 
         DontDestroyOnLoad(this);
         boardScript = GetComponent<BoardManager>();
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
 
 		if (currentGoals == goals)
 		{
-            Debug.Log("YOU WIN!");
+            winText.text = "You Win!!!";
         }
     }
 }

@@ -149,7 +149,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &61399644839491744
@@ -175,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &114299626472613026
 MonoBehaviour:
@@ -194,6 +194,7 @@ MonoBehaviour:
     m_Bits: 768
   on: {fileID: 1348500290851674}
   off: {fileID: 1472820179843298}
+  onGoal: 0
 --- !u!212 &212055208149151222
 SpriteRenderer:
   m_ObjectHideFlags: 1
