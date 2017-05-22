@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4385248882366194}
   - component: {fileID: 61399644839491744}
+  - component: {fileID: 50794852686962762}
   - component: {fileID: 114071354858753748}
   m_Layer: 9
   m_Name: Crate
@@ -131,6 +132,26 @@ Transform:
   m_Father: {fileID: 4385248882366194}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50794852686962762
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587094444131922}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61399644839491744
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -154,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
 --- !u!114 &114071354858753748
 MonoBehaviour:
