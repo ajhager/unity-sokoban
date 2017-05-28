@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Loader : MonoBehaviour
 {
@@ -8,8 +6,8 @@ public class Loader : MonoBehaviour
 
     void Awake()
     {
-		if (GameManager.instance == null)
-		{
+        if (GameManager.instance == null)
+        {
             Instantiate(gameManager);
         }
     }

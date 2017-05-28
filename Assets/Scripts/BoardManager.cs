@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-    private static string[] level1 = {
+    public GameObject crate;
+    public GameObject floor;
+    public GameObject goal;
+    public GameObject player;
+    public GameObject wall;
+
+    static string[] level1 = {
         "#########",
         "#....***#",
         "#.#.#*#*#",
@@ -15,16 +19,9 @@ public class BoardManager : MonoBehaviour
         "#.......#",
         "#########"
     };
+    static readonly string[][] levels = { level1 };
 
-    public static string[][] levels = { level1 };
-
-    public GameObject crate;
-    public GameObject floor;
-    public GameObject goal;
-    public GameObject player;
-    public GameObject wall;
-
-    private Transform board;
+    Transform board;
 
     public int SetupBoard(int levelIndex)
     {
@@ -68,13 +65,13 @@ public class BoardManager : MonoBehaviour
 
                 if (tile != floor)
                 {
-					// Add a floor under any tile that isn't already a floor.
+                    // Add a floor under any tile that isn't already a floor.
                     instance = Instantiate(floor, new Vector3(x / scale, (level.Length - y) / scale, 0), Quaternion.identity);
                     instance.transform.SetParent(board);
 
-					// Untag floors under goals, so crates don't turn off.
-					if (tile == goal)
-					{
+                    // Untag floors under goals, so crates don't turn off.
+                    if (tile == goal)
+                    {
                         instance.tag = "Untagged";
                         goals += 1;
                     }
@@ -82,7 +79,7 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-		// Center the board in the scene.
+        // Center the board in the scene.
         float halfTile = 1 / (scale);
         board.position = new Vector3(-(maxX / 2 - halfTile) / scale, -(maxY / 2 + halfTile) / scale, 0);
 

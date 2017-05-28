@@ -1,20 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerController : MoveController {
+public class PlayerController : MoveController
+{
     public LayerMask pushingLayers;
 
-    private Animator animator;
+    Animator animator;
 
     protected override void Start()
-	{
+    {
         animator = GetComponent<Animator>();
         base.Start();
     }
 
-	private bool Push(float xDir, float yDir, out RaycastHit2D hit)
-	{
+    bool Push(float xDir, float yDir, out RaycastHit2D hit)
+    {
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
 
@@ -22,18 +21,18 @@ public class PlayerController : MoveController {
         hit = Physics2D.Linecast(start, end, pushingLayers);
         collider.enabled = true;
 
-		if (hit.transform == null)
-		{
+        if (hit.transform == null)
+        {
             return true;
         }
 
         return hit.transform.GetComponent<MoveController>().Move(xDir, yDir, out hit);
-	}
+    }
 
     public void Update()
-	{
-		if (moving)
-		{
+    {
+        if (moving)
+        {
             return;
         }
 
@@ -41,19 +40,20 @@ public class PlayerController : MoveController {
         float horizontal = Input.GetAxisRaw("Horizontal") / GameManager.scale;
         float vertical = Input.GetAxisRaw("Vertical") / GameManager.scale;
 
-		if (horizontal != 0)
-		{
+        if (horizontal != 0)
+        {
             vertical = 0;
         }
 
-		animator.SetBool("walkLeft", false);
+        animator.SetBool("walkLeft", false);
         animator.SetBool("walkRight", false);
         animator.SetBool("walkUp", false);
         animator.SetBool("walkDown", false);
 
         if (horizontal != 0 || vertical != 0)
-		{
-			if (horizontal > 0) {
+        {
+            if (horizontal > 0)
+            {
                 animator.SetTrigger("walkRight");
             }
             else if (horizontal < 0)
@@ -70,10 +70,10 @@ public class PlayerController : MoveController {
             }
 
             RaycastHit2D hit = new RaycastHit2D();
-			if (Push(horizontal, vertical, out hit))
-			{
+            if (Push(horizontal, vertical, out hit))
+            {
                 Move(horizontal, vertical, out hit);
-			}
+            }
         }
     }
 }
